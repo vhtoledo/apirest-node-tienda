@@ -13,7 +13,8 @@ const puerto = 3900;
 app.use(cors());
 
 // Convertir body a objeto JS
-app.use(express.json());
+app.use(express.json()); // recibir datos con content-type app/json
+app.use(express.urlencoded({extended:true})); // recibir datos por form-urlencoded
 
 // Rutas
 const rutas_articulo = require("./routes/articulo");
