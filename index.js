@@ -19,6 +19,7 @@ app.use(express.json());
 
 // Crear Rutas 
 
+
 // Crear servidor y escuchar peticiones http
 app.listen(puerto, () => {
     console.log("Servidor corriendo en el puerto "+puerto);
