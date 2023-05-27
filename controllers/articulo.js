@@ -82,9 +82,43 @@ const listar = (req, res) => {
     });
 };
 
+// Obtener un articulo por id
+const uno = (req, res) => {
+    // Recoger un id por la url
+    let id = req.params.id;
+
+    // Buscar articulo por id
+    Articulo.findById(id)
+        .then((articulo) => {
+            // si no existe devoler error
+            if (!articulo) {
+                return res.status(400).json({
+                    status: "error",
+                    mensaje: "No se ha encontrado el articulo"
+                });
+            }
+
+            // Devolver resultado
+            return res.status(200).json({
+                status: "success",
+                articulo
+            });
+        })
+        .catch((error) => {
+            return res.status(500).json({
+              status: "error",
+              mensaje: "Ha ocurrido un error al listar el arituclo",
+              error: error.message,
+            });
+    });
+    
+}
+
+
 
 module.exports = {
     prueba,
     crear,
-    listar
+    listar,
+    uno
 }
