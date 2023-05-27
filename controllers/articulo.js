@@ -55,6 +55,8 @@ const crear = (req, res) => {
 // Metodo de obtener articulos
 const listar = (req, res) => {
     Articulo.find({})
+            .limit(5)
+            .sort({fecha: -1})
 
     .then((articulos) => {
       if (!articulos) {
@@ -66,6 +68,7 @@ const listar = (req, res) => {
 
       return res.status(200).send({
         status: "success",
+        contador: articulos.length,
         articulos,
       });
     })
