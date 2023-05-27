@@ -52,7 +52,36 @@ const crear = (req, res) => {
 
 }
 
+// Metodo de obtener articulos
+const listar = (req, res) => {
+    Articulo.find({})
+
+    .then((articulos) => {
+      if (!articulos) {
+        return res.status(404).json({
+          status: "error",
+          mensaje: "No se han encontrado articulos",
+        });
+      }
+
+      return res.status(200).send({
+        status: "success",
+        articulos,
+      });
+    })
+
+    .catch((error) => {
+      return res.status(500).json({
+        status: "error",
+        mensaje: "Ha ocurrido un error al listar los articulos",
+        error: error.message,
+      });
+    });
+};
+
+
 module.exports = {
     prueba,
-    crear
+    crear,
+    listar
 }

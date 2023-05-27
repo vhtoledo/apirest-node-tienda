@@ -8,6 +8,7 @@ router.get("/ruta-de-prueba", ArticuloControlador.prueba);
 
 // Ruta Util
 router.post("/crear", ArticuloControlador.crear);
+router.get("/articulos", ArticuloControlador.listar);
 
 
 
