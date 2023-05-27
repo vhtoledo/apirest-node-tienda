@@ -10,7 +10,7 @@ router.get("/ruta-de-prueba", ArticuloControlador.prueba);
 router.post("/crear", ArticuloControlador.crear);
 router.get("/articulos", ArticuloControlador.listar);
 router.get("/articulo/:id", ArticuloControlador.uno);
-
+router.delete("/articulo/:id", ArticuloControlador.borrar);
 
 
 

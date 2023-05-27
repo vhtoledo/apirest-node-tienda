@@ -114,11 +114,45 @@ const uno = (req, res) => {
     
 }
 
+// Borrar un articulo
+const borrar = (req, res) => {
+    // Recoger un id por la url
+    let articulo_id = req.params.id;
+
+    // Borrar articulo por id
+    Articulo.findOneAndDelete({_id: articulo_id})
+        .then((articuloBorrado) => {
+            // si no existe devoler error
+            if (!articuloBorrado) {
+                return res.status(400).json({
+                    status: "error",
+                    mensaje: "No se ha encontrado el articulo"
+                });
+            }
+
+            // Devolver resultado
+            return res.status(200).json({
+                status: "success",
+                articuloBorrado,
+                mensaje: "Articulo borrado"
+            });
+        })
+        .catch((error) => {
+            return res.status(500).json({
+              status: "error",
+              mensaje: "Ha ocurrido un error al listar el arituclo",
+              error: error.message,
+            });
+    });
+
+}
+
 
 
 module.exports = {
     prueba,
     crear,
     listar,
-    uno
+    uno,
+    borrar
 }
