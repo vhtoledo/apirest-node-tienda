@@ -1,3 +1,4 @@
+const fs = require("fs");
 const {validarArticulo} = require("../helper/validar");
 const Articulo = require("../models/Articulo");
 
@@ -179,10 +180,58 @@ const editar = (req, res) => {
     });
 };
 
+// Metodo para subir archivo foto del articulo
+const subir = (req, res) => {
+
+  // Configurar multer
+
+  // Recoger el fichero de imagen subido
+  if(!req.file && !req.files){
+    return res.status(400).json({
+      status: "error",
+      mensaje: "Petición invalida"
+    });
+  }
+
+  // Nombre del archivo
+  let archivo = req.file.originalname;
+
+  // Extension del archivo
+  let archivo_split = archivo.split("\.");
+  let extension = archivo_split[1];
+
+  // Comprobar extension correcta
+  if(extension != "png" && extension != "jpg" &&
+     extension != "jpeg" && extension != "gif"){
+
+        // Borrar archivo y dar respuesta
+        fs.unlink(req.file.path, (error) => {
+          return res.status(400).json({
+            status: "error",
+            mensaje: "Imagen inválida"
+          });
+        })
+
+  }else{
+        // Si todo bien, actualizar articulo
+      
+        // Devolver respuesta
+      
+        return res.status(200).json({
+          status: "success",
+          files: req.file
+        });
+
+  }
+
+}
+
+
 module.exports = {
   crear,
   listar,
   uno,
   borrar,
   editar,
+  subir
 };
