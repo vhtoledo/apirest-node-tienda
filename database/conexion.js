@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const conexion = async () => {
 
     try {
-        await mongoose.connect("mongodb://localhost:27017/mi_blog");
+        await mongoose.connect("");
 
         console.log("Conectado a la base de datos")
     } catch (error) {
